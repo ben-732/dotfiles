@@ -1,16 +1,18 @@
 # Machine specific configs
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
+_ZSH_DIR="$HOME/.zsh"
+
 export PATH="/opt/homebrew/bin:$PATH"
 
-source ~/.zsh/aliases.zsh
-source ~/.zsh/functions.zsh
+source $_ZSH_DIR/aliases.zsh
+source $_ZSH_DIR/functions.zsh
 
-eval "$(oh-my-posh init zsh --config ~/.zsh/poshthemes/me.omp.json)";
+eval "$(oh-my-posh init zsh --config $_ZSH_DIR/poshthemes/me.omp.json)";
 
 
 # Load work config conditionally
-[[ -f ~/.zsh/work.zsh ]] && source ~/.zsh/work.zsh
+[[ -f $_ZSH_DIR/work.zsh ]] && source $_ZSH_DIR/work.zsh || true
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
@@ -22,5 +24,5 @@ esac
 
 # Nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || true
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" || true
