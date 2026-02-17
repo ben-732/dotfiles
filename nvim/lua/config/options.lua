@@ -17,3 +17,4 @@ opt.expandtab = true        -- Use spaces instead of tabs
 opt.shiftwidth = 2          -- Size of an indent
 opt.tabstop = 2             -- Number of spaces tabs count for
 opt.smartindent = true      -- Insert indents automatically
+

@@ -5,7 +5,7 @@ return {
     config = function()
       -- The new version doesn't require the .configs.setup call for basic use
       -- We just use the main module's setup
-      require("nvim-treesitter.configs").setup({
+      require("nvim-treesitter").setup({
         ensure_installed = {
           "lua",
           "javascript",

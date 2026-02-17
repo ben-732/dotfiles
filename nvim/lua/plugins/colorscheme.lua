@@ -1,9 +1,9 @@
 return {
-  { "Mofiqul/dracula.nvim" },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "dracula",
-    }
-  }
+  "Mofiqul/dracula.nvim",
+  name = "dracula",
+  priority = 1000,
+  config = function()
+    vim.cmd.colorscheme("dracula")
+  end,
 }
+
