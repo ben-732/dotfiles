@@ -2,13 +2,13 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      "saghen/blink.cmp",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
     },
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({
-        -- Updated tsserver -> ts_ls
         ensure_installed = { "lua_ls", "ts_ls", "pyright", "terraformls" },
       })
 
@@ -20,11 +20,30 @@ return {
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
       end
 
-      -- New Neovim 0.11+ way to setup servers
-      -- Use vim.lsp.config instead of require('lspconfig')
-      vim.lsp.config("lua_ls", { on_attach = on_attach })
-      vim.lsp.config("ts_ls", { on_attach = on_attach })
-      vim.lsp.config("terraformls", { on_attach = on_attach })
-    end,
+      local capabilities = require("blink.cmp").get_lsp_capabilities() -- :contentReference[oaicite:1]{index=1}
+
+      -- Neovim 0.11+ API
+      vim.lsp.config("lua_ls", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
+      vim.lsp.config("ts_ls", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
+      vim.lsp.config("pyright", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
+      vim.lsp.config("terraformls", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        -- optional: constrain/expand filetypes if you want
+        filetypes = { "terraform", "terraform-vars", "hcl" },
+      })
+   end,
   },
 }
