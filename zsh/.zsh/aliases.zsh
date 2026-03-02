@@ -3,6 +3,8 @@ alias bp="code $HOME/.zshrc"
 alias gti="git"
 alias pm="pnpm"
 
+alias tf="terraform"
+
 # If Eza installed register aliases + help function
 if command -v eza &> /dev/null; then 
   alias ls='eza'
