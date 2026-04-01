@@ -5,3 +5,14 @@
 [data]
   email = {{ promptStringOnce . "email" "Email address" "22252563+ben-732@users.noreply.github.com" | quote }}
 
+[merge]
+    command = "code"
+    args = [
+        "--wait",
+        "--new-window",
+        "--merge",
+        '{{ "{{ .Destination }}" }}',
+        '{{ "{{ .Target }}" }}',
+        '{{ "{{ printf `%s.base` .Target }}" }}',
+        '{{ "{{ .Source }}" }}',
+    ]

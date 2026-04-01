@@ -1,5 +1,3 @@
-source $/zsh/.zshrc
-
 # plugins / completions
 [[ -f ~/.config/zsh/env.zsh ]] && source ~/.config/zsh/env.zsh
 [[ -f ~/.config/zsh/plugins.zsh ]] && source ~/.config/zsh/plugins.zsh
