@@ -1,0 +1,7 @@
+[edit]
+  command  = "code"
+  args     = ["-r", "--wait"]
+
+[data]
+  email = {{ promptStringOnce . "email" "Email address" "22252563+ben-732@users.noreply.github.com" | quote }}
+

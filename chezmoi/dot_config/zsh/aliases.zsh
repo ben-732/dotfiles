@@ -1,4 +1,6 @@
-alias bp="code $HOME/.zshrc"
+alias bp="chezmoi edit --update $HOME/.zshrc"
+
+alias lvim="NVIM_APPNAME='lvim' nvim"
 
 alias gti="git"
 alias pm="pnpm"

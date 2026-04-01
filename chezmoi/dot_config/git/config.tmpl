@@ -1,0 +1,51 @@
+[user]
+  name = Ben McMurtrie
+  email = {{ .email | quote }}
+
+[core]
+  editor = nvim
+
+[init]
+  defaultBranch = main
+
+[merge]
+  conflictstyle = zdiff3
+
+
+[alias]
+  s = status
+  st = status --short --branch
+  co = checkout
+  br = branch
+  last = log - HEAD
+  unstage = restore --staged
+  amend = commit --amend
+  fixup = commit --amend --no-edit
+  
+  filelog = log -u
+  uncommit = reset --soft HEAD~1
+
+  remotes = remote -v
+  branches = branch -a
+
+
+[branch]
+    sort = -committerdate
+
+[color]
+    ui = true
+
+[color "branch"]
+    current = blue
+    local = yellow
+    remote = green
+
+[pull]
+    rebase = true
+
+
+[credential]
+    helper =
+    helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+    useHttpPath = true

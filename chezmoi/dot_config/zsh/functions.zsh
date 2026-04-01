@@ -20,3 +20,7 @@ function kill-port {
         echo "No process found on port $port"
     fi
 }
+
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
