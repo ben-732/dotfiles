@@ -5,7 +5,12 @@ alias lvim="NVIM_APPNAME='lvim' nvim"
 alias gti="git"
 alias pm="pnpm"
 
-alias tf="terraform"
+# If on work computer, use terraform, otherwise use opentofu
+{{- if .is_work_computer }}
+  alias tf='terraform'
+{{- else }}
+  alias tf='opentofu'
+{{- end }}
 
 # If Eza installed register aliases + help function
 if command -v eza &> /dev/null; then 

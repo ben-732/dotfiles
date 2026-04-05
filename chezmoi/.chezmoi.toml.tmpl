@@ -4,6 +4,7 @@
 
 [data]
   email = {{ promptStringOnce . "email" "Email address" "22252563+ben-732@users.noreply.github.com" | quote }}
+	is_work_computer = {{ promptBoolOnce . "is_work_computer" "Is this a work computer?" false }}
 
 [merge]
     command = "code"
