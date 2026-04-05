@@ -1,0 +1,23 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+ITERM_PREFS_DIR="{{ .chezmoi.sourceDir }}/assets/iterm"
+
+if [ ! -d "$ITERM_PREFS_DIR" ]; then
+  echo "Skipping iTerm setup: directory not found -> $ITERM_PREFS_DIR"
+  exit 0
+fi
+
+# Configure iTerm2 to use custom preferences folder
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$ITERM_PREFS_DIR"
+defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+
+# Optional: ensure iTerm picks up changes immediately
+if pgrep -x "iTerm2" >/dev/null; then
+  echo "Restarting iTerm2 to apply preferences..."
+  osascript -e 'tell application "iTerm2" to quit'
+fi
+
+echo "iTerm2 preferences set to: $ITERM_PREFS_DIR"
+{{- end }}
