@@ -17,16 +17,39 @@
   st = status --short --branch
   co = checkout
   br = branch
-  last = log - HEAD
+  
+
+  d = diff
+  dc = diff --cached
+  ds = diff --stat
+
+  l = log --oneline --graph --decorate
+  ll = log --pretty=format:'%C(blue)%cd%Creset %C(cyan)(%cr)%Creset %C(yellow)%h%Creset %C(green)%an%Creset: %s %C(auto)%d%Creset' --date=format:'%Y-%m-%d %H:%M'
+  lg = log --graph --decorate --pretty=format:'%C(yellow)%h%Creset %C(blue)%cd%Creset %C(cyan)(%cr)%Creset %C(green)%an%Creset: %s %C(auto)%d%Creset' --date=format:'%Y-%m-%d %H:%M'
+  last = log -1 HEAD
+
+  contributors = shortlog -sn
+
+  a = add
+  aa = add .
+  ap = add -p
+
   unstage = restore --staged
+  untrack = rm --cached
+
   amend = commit --amend
   fixup = commit --amend --no-edit
+
+  c = commit
+  cm = commit -m
+
   
   filelog = log -u
   uncommit = reset --soft HEAD~1
 
   remotes = remote -v
   branches = branch -a
+  current = branch --show-current
 
 
 [branch]
