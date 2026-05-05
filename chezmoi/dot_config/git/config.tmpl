@@ -40,6 +40,8 @@
   amend = commit --amend
   fixup = commit --amend --no-edit
 
+  fpush = push --force-with-lease
+
   c = commit
   cm = commit -m
 
@@ -78,3 +80,9 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true

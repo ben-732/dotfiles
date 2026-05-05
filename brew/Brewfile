@@ -12,7 +12,6 @@ brew "hashicorp/tap/terraform"
 brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 
 cask "visual-studio-code"
-cask "arc"
 cask "iterm2"
 cask "rectangle"
 cask "font-hack-nerd-font"
