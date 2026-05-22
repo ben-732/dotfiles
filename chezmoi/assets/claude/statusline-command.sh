@@ -39,10 +39,22 @@ agent_name=$(echo "$input" | jq -r '.agent.name // empty')
 worktree_name=$(echo "$input" | jq -r '.worktree.name // empty')
 
 # --- Git branch ---
-git_branch=$(echo "$input" | jq -r '.workspace.git_worktree // empty')
+# In a worktree, .workspace.git_worktree is just the worktree slug (same as
+# .worktree.name) — using it for the branch causes both segments to show the
+# same value. Prefer .worktree.branch (the worktree's actual HEAD) when set.
+if [ -n "$worktree_name" ]; then
+  git_branch=$(echo "$input" | jq -r '.worktree.branch // empty')
+else
+  git_branch=$(echo "$input" | jq -r '.workspace.git_worktree // empty')
+fi
 if [ -z "$git_branch" ]; then
   git_branch=$(git -C "$cwd" --no-optional-locks symbolic-ref --short HEAD 2>/dev/null \
     || git -C "$cwd" --no-optional-locks rev-parse --short HEAD 2>/dev/null)
+fi
+# Final guard: if branch and worktree slug still match, drop the worktree
+# segment so we don't print the same name twice.
+if [ -n "$worktree_name" ] && [ "$worktree_name" = "$git_branch" ]; then
+  worktree_name=""
 fi
 
 # --- Format duration: days/hours/minutes, hide leading zero segments ---
