@@ -2,8 +2,8 @@
 # Claude Code statusLine command.
 # Receives JSON on stdin; emits a single status line.
 # Layout (segments shown only when applicable, separated by " │ "):
-#   [dir] [branch] [worktree] [@agent] [model] [effort] [ctx]
-#   [tokens in/out] [+added -removed] [cost] [duration] [5h%] [7d%]
+#   [dir] [branch+worktree-icon] [@agent] [model] [effort] [ctx]
+#   [tokens in/out] [+added -removed] [cost] [duration] [5h%] [7d%] [version]
 # All segments left-aligned with " │ " separators. Claude Code reserves the
 # right side of this row for its own notifications, so we don't right-align.
 # Nerd Font glyphs (single-width, monochrome):
@@ -18,12 +18,31 @@
 #   U+F063  nf-fa-arrow_down      output tokens
 #   U+F017  nf-fa-clock_o         duration
 #   U+F252  nf-fa-hourglass_end   rate limit
+#   U+F02B  nf-fa-tag             version
+#   U+F401  nf-oct-repo           git repo
 
 input=$(cat)
 
 # --- Raw values ---
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
-dir=$(basename "$cwd")
+repo_name=$(echo "$input" | jq -r '.workspace.repo.name // empty')
+project_dir=$(echo "$input" | jq -r '.workspace.project_dir // empty')
+original_cwd=$(echo "$input" | jq -r '.worktree.original_cwd // empty')
+# Prefer the git repo name (stable across worktrees), then project_dir,
+# then the pre-worktree cwd, finally the current cwd basename.
+if [ -n "$repo_name" ]; then
+  dir="$repo_name"
+  dir_from_repo=1
+elif [ -n "$project_dir" ]; then
+  dir=$(basename "$project_dir")
+  dir_from_repo=""
+elif [ -n "$original_cwd" ]; then
+  dir=$(basename "$original_cwd")
+  dir_from_repo=""
+else
+  dir=$(basename "$cwd")
+  dir_from_repo=""
+fi
 model=$(echo "$input" | jq -r '.model.display_name // ""')
 used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
 total_cost=$(echo "$input" | jq -r '.cost.total_cost_usd // empty')
@@ -37,11 +56,11 @@ rl_7d=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
 effort_level=$(echo "$input" | jq -r '.effort.level // empty')
 agent_name=$(echo "$input" | jq -r '.agent.name // empty')
 worktree_name=$(echo "$input" | jq -r '.worktree.name // empty')
+version=$(echo "$input" | jq -r '.version // empty')
 
 # --- Git branch ---
-# In a worktree, .workspace.git_worktree is just the worktree slug (same as
-# .worktree.name) — using it for the branch causes both segments to show the
-# same value. Prefer .worktree.branch (the worktree's actual HEAD) when set.
+# In a worktree, .workspace.git_worktree is the worktree slug, not the branch
+# name. Prefer .worktree.branch (the worktree's actual HEAD) when set.
 if [ -n "$worktree_name" ]; then
   git_branch=$(echo "$input" | jq -r '.worktree.branch // empty')
 else
@@ -50,11 +69,6 @@ fi
 if [ -z "$git_branch" ]; then
   git_branch=$(git -C "$cwd" --no-optional-locks symbolic-ref --short HEAD 2>/dev/null \
     || git -C "$cwd" --no-optional-locks rev-parse --short HEAD 2>/dev/null)
-fi
-# Final guard: if branch and worktree slug still match, drop the worktree
-# segment so we don't print the same name twice.
-if [ -n "$worktree_name" ] && [ "$worktree_name" = "$git_branch" ]; then
-  worktree_name=""
 fi
 
 # --- Format duration: days/hours/minutes, hide leading zero segments ---
@@ -118,6 +132,8 @@ ICON_CTX=''       # U+F2DB  nf-fa-microchip
 ICON_TOK_IN=''    # U+F062  nf-fa-arrow_up
 ICON_TOK_OUT=''   # U+F063  nf-fa-arrow_down
 ICON_RL=''        # U+F252  nf-fa-hourglass_end
+ICON_VERSION=''   # U+F02B  nf-fa-tag
+ICON_REPO=''      # U+F401  nf-oct-repo
 
 # --- Pick colour for a rate-limit % : <50% dim, 50-80% warn, >80% alert ---
 pct_colour() {
@@ -175,9 +191,16 @@ append() {
   fi
 }
 
-append "${ACCENT}${ICON_DIR} ${dir}${RESET}"
-[ -n "$git_branch" ]    && append "${ACCENT}${ICON_BRANCH} ${git_branch}${RESET}"
-[ -n "$worktree_name" ] && append "${WARN}${ICON_WORKTREE} ${worktree_name}${RESET}"
+if [ -n "$dir_from_repo" ]; then
+  append "${ACCENT}${ICON_REPO} ${dir}${RESET}"
+else
+  append "${ACCENT}${ICON_DIR} ${dir}${RESET}"
+fi
+if [ -n "$git_branch" ]; then
+  branch_seg="${ACCENT}${ICON_BRANCH} ${git_branch}${RESET}"
+  [ -n "$worktree_name" ] && branch_seg="${branch_seg} ${WARN}${ICON_WORKTREE}${RESET}"
+  append "$branch_seg"
+fi
 [ -n "$agent_name" ]    && append "${WARN}${ICON_AGENT} ${agent_name}${RESET}"
 [ -n "$model" ]         && append "${MODEL}${ICON_MODEL} ${model}${RESET}"
 case "$effort_level" in
@@ -205,5 +228,6 @@ fi
 [ -n "$duration_str" ]  && append "${DIM}${ICON_CLOCK} ${duration_str}${RESET}"
 seg=$(rl_segment "5h" "$rl_5h") && append "$seg"
 seg=$(rl_segment "7d" "$rl_7d") && append "$seg"
+[ -n "$version" ]       && append "${DIM}${ICON_VERSION} ${version}${RESET}"
 
 printf "%b\n" "$line"
