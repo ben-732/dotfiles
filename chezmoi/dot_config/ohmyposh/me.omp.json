@@ -6,7 +6,7 @@
       "segments": [
         {
           "foreground": "#46555f",
-          "properties": {
+          "options": {
             "style": "full"
           },
           "style": "plain",
@@ -33,6 +33,19 @@
         }
       ],
       "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "type": "prompt",
+
+      "segments": [
+        {
+          "type": "aws",
+          "style": "plain",
+          "foreground": "#fc8721",
+          "template": "  {{.Profile}}{{if .Region}}@{{.Region}}{{end}}  "
+        }
+      ]
     },
     {
       "alignment": "left",

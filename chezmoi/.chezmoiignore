@@ -1,2 +1,7 @@
 .config/nvim/lazy-lock.json
-.config/mvim/lazy-lock.json
+assets
+
+{{ if .is_work_computer }}
+.config/zsh/env.zsh
+{{ end }}
+
