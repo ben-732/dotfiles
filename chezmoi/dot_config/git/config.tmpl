@@ -77,14 +77,17 @@
   process = git-lfs filter-process
   required = true
 
+# GitHub CLI credential helper (`gh auth git-credential`)
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
-[credential]
-	helper = 
-	helper = /usr/local/share/gcm-core/git-credential-manager
-[credential "https://dev.azure.com"]
-	useHttpPath = true
+
+# Git Credential Manager (no longer used)
+# [credential]
+# 	helper =
+# 	helper = /usr/local/share/gcm-core/git-credential-manager
+# [credential "https://dev.azure.com"]
+# 	useHttpPath = true

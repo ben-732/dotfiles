@@ -1,3 +1,9 @@
+#!/usr/bin/env bash
+# Emit the chezmoi-managed section of ~/.zshrc, then preserve everything
+# below the marker from the existing file (passed on stdin). Tools like
+# Ansible can append below the marker without `chezmoi apply` clobbering it.
+
+cat <<'EOF'
 # plugins / completions
 [[ -f ~/.config/zsh/env.zsh ]] && source ~/.config/zsh/env.zsh
 [[ -f ~/.config/zsh/plugins.zsh ]] && source ~/.config/zsh/plugins.zsh
@@ -9,6 +15,9 @@
 [[ -f ~/.config/zsh/prompt.zsh ]] && source ~/.config/zsh/prompt.zsh
 
 # Local machine specific config
-[[ -f ~/.local.zsh ]] && source ~/.local.zsh
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
+# -- End of chezmoi managed config --
+EOF
 
+awk '/^# -- End of chezmoi managed config --$/ {found=1; next} found'

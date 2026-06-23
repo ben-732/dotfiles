@@ -1,3 +1,5 @@
+export EDITOR=nvim
+
 # Node Version Manager setup
 export NVM_DIR="$HOME/.nvm"
 

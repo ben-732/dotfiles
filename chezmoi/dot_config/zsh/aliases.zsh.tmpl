@@ -1,4 +1,5 @@
 alias bp="chezmoi edit --watch $HOME/.zshrc"
+alias zl='$EDITOR ~/.zshrc.local'
 
 alias mvim="NVIM_APPNAME='mvim' nvim"
 
@@ -7,12 +8,7 @@ alias pm="pnpm"
 
 alias claude="claude --effort max"
 
-# If on work computer, use terraform, otherwise use opentofu
-{{- if .is_work_computer }}
-  alias tf='terraform'
-{{- else }}
-  alias tf='opentofu'
-{{- end }}
+alias tf='terraform'
 
 # If Eza installed register aliases + help function
 if command -v eza &> /dev/null; then 
