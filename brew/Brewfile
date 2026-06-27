@@ -1,9 +1,13 @@
+# Taps
+tap "jandedobbeleer/oh-my-posh", trusted: { casks: ["oh-my-posh"] }
+
 # Brews
 brew "asdf"
 brew "awscli"
+brew "aws-vault"
 brew "btop"
 brew "chezmoi"
-brew "colima"
+brew "colima", restart_service: :changed
 brew "docker"
 brew "eza"
 brew "fd"
@@ -13,9 +17,9 @@ brew "neovim"
 brew "ripgrep"
 brew "tmux"
 brew "uv"
-brew "watchman"
 brew "worktrunk"
 brew "yq"
+brew "jandedobbeleer/oh-my-posh/oh-my-posh", trusted: true
 
 # Casks
 cask "font-hack-nerd-font"
