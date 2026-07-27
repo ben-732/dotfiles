@@ -2,6 +2,6 @@
 assets
 
 {{ if .is_work_computer }}
-.config/zsh/env.zsh
+.config/zsh/env.personal.zsh
 {{ end }}
 
