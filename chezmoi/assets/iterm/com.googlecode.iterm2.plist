@@ -17,9 +17,9 @@
 	<key>AIVectorStore</key>
 	<integer>0</integer>
 	<key>AiMaxTokens</key>
-	<integer>400000</integer>
+	<integer>1050000</integer>
 	<key>AiModel</key>
-	<string>gpt-5.2</string>
+	<string>gpt-5.5</string>
 	<key>AiResponseMaxTokens</key>
 	<integer>128000</integer>
 	<key>AitermURL</key>
@@ -28,6 +28,33 @@
 	<true/>
 	<key>AllowSymbolicHotKeys</key>
 	<false/>
+	<key>CodeReviewSavedPrompts</key>
+	<data>
+	W3sidXVpZCI6IkQ2OTQ2QzRCLUJFRDItNDM5MS1COTZELTc4OEY2M0YyMzY5QSIsIm5h
+	bWUiOiJEZWZhdWx0IiwidGV4dCI6IlJldmlldyB0aGUgcGVuZGluZyBjaGFuZ2VzIGlu
+	IHRoaXMgcmVwby4gRmxhZyBpc3N1ZXMgYSBjYXJlZnVsIG1haW50YWluZXIgd291bGQg
+	YmxvY2sgb24gYmVmb3JlIG1lcmdlLCBpbiByb3VnaGx5IHRoaXMgb3JkZXI6XG4gIDEu
+	IENvcnJlY3RuZXNzIOKAlCBsb2dpYyBlcnJvcnMsIGJyb2tlbiBpbnZhcmlhbnRzLCBt
+	aXNzZWQgZWRnZSBjYXNlcywgb2ZmLWJ5LW9uZSwgcmFjZXMsIGxpZmV0aW1lXC9tZW1v
+	cnkgYnVncywgZXJyb3IgcGF0aHMgdGhhdCBzd2FsbG93IGZhaWx1cmVzLlxuICAyLiBT
+	ZWN1cml0eSDigJQgaW5qZWN0aW9uLCBhdXRoblwvYXV0aHogbWlzdGFrZXMsIHNlY3Jl
+	dCBoYW5kbGluZywgdW5zYWZlIGRlc2VyaWFsaXphdGlvbiwgdW5zYWZlIGRlZmF1bHRz
+	LCBUT0NUT1UuXG4gIDMuIFJlbGlhYmlsaXR5ICYgcGVyZm9ybWFuY2Ug4oCUIGJsb2Nr
+	aW5nIHRoZSB3cm9uZyB0aHJlYWQsIHVuYm91bmRlZCByZXNvdXJjZSB1c2UsIGFjY2lk
+	ZW50YWwgTyhOwrIpLCByZXRyaWVzIHdpdGhvdXQgYmFja29mZiwgc2lsZW50IGZhaWx1
+	cmUgcGF0aHMuXG4gIDQuIENvbnRyYWN0IHJpc2sg4oCUIGJlaGF2aW9yIGNoYW5nZXMg
+	Y2FsbGVycyByZWx5IG9uLCBzaWxlbnRseSBjaGFuZ2VkIGRlZmF1bHRzLCBicm9rZW4g
+	YmFja3dhcmQgY29tcGF0aWJpbGl0eSwgbWlzc2luZyBtaWdyYXRpb25zLlxuXG5Gb3Ig
+	ZWFjaCBmaW5kaW5nIGNpdGUgYGZpbGU6bGluZWAsIGV4cGxhaW4gKndoeSogaXQgaXMg
+	d3JvbmcgKG5vdCB3aGF0IHRoZSBjb2RlIGRvZXMpLCBhbmQgcHJvcG9zZSBhIGNvbmNy
+	ZXRlIGZpeCB3aGVuIG9uZSBpcyBvYnZpb3VzLiBCZSBjYWxpYnJhdGVkOiBpZiBhIGZp
+	bmRpbmcgaXMgbm90IGhpZ2gtY29uZmlkZW5jZSwgc2F5IHNvIG9yIHNraXAgaXQuIFZl
+	cmlmeSBjbGFpbXMgYWdhaW5zdCB0aGUgYWN0dWFsIGNvZGUgcmF0aGVyIHRoYW4gaW5m
+	ZXJyaW5nIGZyb20gbmFtZXMuXG5cblNraXAgcHVyZSBzdHlsZSwgZm9ybWF0dGluZywg
+	bmFtaW5nLCBhbmQgYW55dGhpbmcgYSBsaW50ZXIgb3IgQ0kgYWxyZWFkeSBlbmZvcmNl
+	cy5cblxuSWYgeW91IGZpbmQgbm90aGluZyB3b3J0aCBmaXhpbmcsIHNheSBzbyBwbGFp
+	bmx5LiJ9XQ==
+	</data>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>dracular</key>
@@ -245,6 +272,10 @@
 	<string>0066A7C5-DC22-46AB-88BF-FCAD4FEB6190</string>
 	<key>Default Browser Profile Guid</key>
 	<string>0066A7C5-DC22-46AB-88BF-FCAD4FEB6190</string>
+	<key>DimInactiveSplitPanes</key>
+	<false/>
+	<key>EnableAPIServer</key>
+	<true/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
@@ -1071,7 +1102,7 @@
 			<key>Description</key>
 			<string>Default</string>
 			<key>Disable Window Resizing</key>
-			<true/>
+			<false/>
 			<key>Flashing Bell</key>
 			<false/>
 			<key>Foreground Color</key>
@@ -1406,9 +1437,46 @@
 	<true/>
 	<key>SoundForEsc</key>
 	<false/>
+	<key>SplitPaneDimmingAmount</key>
+	<real>0.59999999999999998</real>
+	<key>ToolbeltTools</key>
+	<array>
+		<string>Session Status</string>
+	</array>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
+	<key>Workgroups</key>
+	<data>
+	W3sibmFtZSI6IkNsYXVkZSBDb2RlIiwic2Vzc2lvbnMiOlt7Im1vZGUiOiJyZWd1bGFy
+	IiwicGVyRmlsZUNvbW1hbmQiOiIiLCJ1bmlxdWVJZGVudGlmaWVyIjoiYnVpbHRpbi5j
+	bGF1ZGVDb2RlLm1haW4iLCJ0b29sYmFySXRlbXMiOlt7ImtpbmQiOiJtb2RlU3dpdGNo
+	ZXIifSx7ImtpbmQiOiJnaXRTdGF0dXMifSx7ImtpbmQiOiJhdXRvUmVxdWVzdFJldmll
+	d1doZW5JZGxlIn1dLCJjb21tYW5kIjoiIiwia2luZCI6eyJraW5kIjoicm9vdCJ9LCJk
+	aXNwbGF5TmFtZSI6IkNoYXQiLCJ1cmxTdHJpbmciOiIifSx7ImRpc3BsYXlOYW1lIjoi
+	RGlmZiIsIm1vZGUiOiJkaWZmIiwicGVyRmlsZUNvbW1hbmQiOiJnaXQgZGlmZnRvb2wg
+	LXkgLXggdmltZGlmZiBcXChnaXRCYXNlKSAtLSBcXChmaWxlKSIsInVuaXF1ZUlkZW50
+	aWZpZXIiOiJidWlsdGluLmNsYXVkZUNvZGUuZGlmZiIsInRvb2xiYXJJdGVtcyI6W3si
+	a2luZCI6Im1vZGVTd2l0Y2hlciJ9LHsia2luZCI6ImNoYW5nZWRGaWxlU2VsZWN0b3Ii
+	fSx7ImtpbmQiOiJnaXRCYXNlU2VsZWN0b3IifSx7ImJhY2tTaG9ydGN1dCI6eyJzZXJp
+	YWxpemVkIjoiMHhmNzAyLTB4MzQwMDAwLTB4N2IifSwiZm9yd2FyZFNob3J0Y3V0Ijp7
+	InNlcmlhbGl6ZWQiOiIweGY3MDMtMHgzNDAwMDAtMHg3YyJ9LCJraW5kIjoibmF2aWdh
+	dGlvbiIsInJlbG9hZFNob3J0Y3V0Ijp7InNlcmlhbGl6ZWQiOiIweDcyLTB4MTAwMDAw
+	LTB4ZiJ9fV0sImNvbW1hbmQiOiJnaXQgZGlmZnRvb2wgLXkgLXggdmltZGlmZiBcXChn
+	aXRCYXNlKSIsImtpbmQiOnsia2luZCI6InBlZXIifSwicGFyZW50SUQiOiJidWlsdGlu
+	LmNsYXVkZUNvZGUubWFpbiIsInVybFN0cmluZyI6IiJ9LHsiZGlzcGxheU5hbWUiOiJD
+	b2RlIFJldmlldyIsIm1vZGUiOiJjb2RlUmV2aWV3IiwicGVyRmlsZUNvbW1hbmQiOiIi
+	LCJ1bmlxdWVJZGVudGlmaWVyIjoiYnVpbHRpbi5jbGF1ZGVDb2RlLnJldmlldyIsInRv
+	b2xiYXJJdGVtcyI6W3sia2luZCI6Im1vZGVTd2l0Y2hlciJ9LHsia2luZCI6InJlbG9h
+	ZCIsInNob3J0Y3V0Ijp7InNlcmlhbGl6ZWQiOiIweDcyLTB4MTAwMDAwLTB4ZiJ9fSx7
+	ImtpbmQiOiJhdXRvU2VuZENsaXBwaW5nc1doZW5JZGxlIn1dLCJjb21tYW5kIjoiY2xh
+	dWRlIFxcKGNvZGVSZXZpZXdQcm9tcHQpIC0tYXBwZW5kLXN5c3RlbS1wcm9tcHQtZmls
+	ZSAnXFwoY29kZVJldmlld1N5c3RlbVByb21wdEZpbGUpJyAtLXNldHRpbmdzICdcXChp
+	dGVybTIuYXBwQnVuZGxlUGF0aClcL0NvbnRlbnRzXC9SZXNvdXJjZXNcL2NvZGUtcmV2
+	aWV3LXNldHRpbmdzLnR4dCciLCJraW5kIjp7ImtpbmQiOiJwZWVyIn0sInBhcmVudElE
+	IjoiYnVpbHRpbi5jbGF1ZGVDb2RlLm1haW4iLCJ1cmxTdHJpbmciOiIifV0sInVuaXF1
+	ZUlkZW50aWZpZXIiOiJidWlsdGluLmNsYXVkZUNvZGUifV0=
+	</data>
 	<key>findMode_iTerm</key>
-	<integer>0</integer>
+	<integer>2</integer>
 </dict>
 </plist>
